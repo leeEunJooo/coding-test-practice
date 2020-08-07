@@ -63,7 +63,7 @@ void make_border(int x, int y){
     //왼족위에서 오른쪽 아래로
     for(int d1 = 1; d1<=x; d1++){
         //왼쪽 밑에서 오른쪽 위로
-        //현재 y좌표부터 판의 가로길이 끝까지 남은 칸 수
+        //현재 y좌표부터 판의 가로길이 끝까지
         for(int d2=1; d2 <=N-x; d2++){
             //boundary
             //2, 3, 4
