@@ -64,11 +64,19 @@ int main(){
 
 	//N±Ø 0 S±Ø 1
     for(int i=0; i<4; i++){
-        string s;cin >> s;
+        string s; cin >> s;
         for(int j=0; j<8; j++){
-            topni[i][j] = s[i]-'0';
+            topni[i][j] = s[j]-'0';
         }
     }
+
+//    for(int i=0; i<4; i++){
+//        for(int j=0; j<8; j++){
+//            cout << topni[i][j]<<" ";
+//        }
+//    }
+
+
 
     cin >>K;
     for(int i=0; i<K; i++){
