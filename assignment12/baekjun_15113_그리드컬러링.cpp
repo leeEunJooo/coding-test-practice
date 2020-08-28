@@ -2,47 +2,125 @@
 
 using namespace std;
 
-char arr[31][31];
+string line[35];
 
-int main(){
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+int N, M;
+bool over;
+long dp[35][35];
+long result = 1;
 
-	int M,N; cin >> M>>N;
+void fill_color(int x, int y) {
 
-    vector<int> given_line(N+1) ;
-     for (int i=0; i<=N; i++)
-      given_line[i] = 1 ;
+	if(line[x][y]=='B'){
 
-    for (int i=0; i<M; i++) {
-        string strs; cin >>strs;
-        vector<long long> renew_line(N+1) ;
+		for (int i = 0; i <= x; i++) {
+			for (int j = 0; j <= y; j++) {
+				if (line[i][j] == 'R'){
+                  over = true;
+                  return;
+				}
+				line[i][j] = 'B';
+			}
+		}
 
-        int lastB = 0 ;
-        int lastRed = N ;
+	}
 
-        for (int j=0; j<N; j++){
-            if (strs[j] == 'R')
-                lastRed = min(j, lastRed) ;
-           else if (strs[j] == 'B')
-                lastB = j ;
-        }
+	//blue가 못옴
+	else if(line[x][y]=='R'){
 
-        int s = 0;
-        for (int j=N; j>=0; j--) {
-         if (lastB <j && j<=lastRed)
-            s += given_line[j] ;
+		for (int i = x; i < N; i++) {
+			for (int j = y; j < M; j++) {
+				if (line[i][j] == 'B'){
+                over = true;
+				return;
+				}
+				line[i][j] = 'R';
+			}
+		}
 
-         if (j <= lastRed)
-            renew_line[j] += s ;
-      }
+	}
+}
 
-      swap(renew_line, given_line) ;
+long dpcnt(int x, int y) {
+//    cout << "(" << x << "," << y <<")"<<endl;
+	if (dp[x][y] != 0) return dp[x][y];
 
-   }
+	dp[x][y] = 1;
+	//둘째줄인것부터
+	for (int i=0; i<x; i++) {
+        //오른쪽이 비어있으면 가능
+		for (int j = y + 1; j<M; j++) {
+			if (line[i][j] == '.') {
+				dp[x][y] += dpcnt(i, j);
+			}
+		}
+	}
+//    cout<<endl;
+	return dp[x][y];
+}
 
-   cout << board[0] << endl ;
+void solve(){
+
+    fill(&dp[0][0],&dp[34][35],0);
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (line[i][j] == '.') continue;
+
+			fill_color(i, j);
+			if(over){
+                cout <<"0\n";
+              return;
+			}
+		}
+	}
+
+//      for(int k=0; k<N; k++)
+//            cout << line[k]<<"\n";
+//            cout <<"\n";
+
+
+
+//3 3
+//...
+//B..
+//..R
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (line[i][j] == '.')
+                dpcnt(i, j);
+		}
+	}
+
+//	for (int i = 0; i < N; i++) {
+//		for (int j = 0; j < M; j++) {
+//            cout <<dp[i][j]<<" ";
+//		}
+//		cout <<endl;
+//	}
+
+
+    for(int i=0; i<N; i++)
+        for(int j=0; j<M; j++)
+            result+=dp[i][j];
+
+    cout << result <<"\n";
+
+}
+
+
+int main() {
+	cin.tie(0); ios::sync_with_stdio(0);
+	cin >> N >> M;
+
+	for (int i = 0; i < N; i++)
+		cin >> line[i];
+
+
+    //solve
+    solve();
 
 
 	return 0;
 }
+
