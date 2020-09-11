@@ -116,29 +116,6 @@ int solution(int m, int n, vector<string> board) {
         v.clear();
     }
 
-
-//        cout << turn(board)<<endl;
-//        bomb(board);
-//        rearrange(board);
-//        v.clear();
-//
-//
-//        cout << turn(board)<<endl;
-//        bomb(board);
-//        rearrange(board);
-//        v.clear();
-
-//        cout << turn(board)<<endl;
-//        bomb(board);
-//        rearrange(board);
-//        v.clear();
-//
-//        cout << turn(board)<<endl;
-//        bomb(board);
-//        rearrange(board);
-//        v.clear();
-
-
     for(int i=0; i<m; i++){
         for(int j=0; j<n; j++){
 
@@ -163,8 +140,8 @@ int main(){
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	cout << solution(4,5,{"CCBDE", "AAADE", "AAABF", "CCBBF"});
-	cout << solution(6,6,{"TTTANT", "RRFACC", "RRRFCC", "TRRRAA","TTMMMF","TMMTTJ"});
+//	cout << solution(4,5,{"CCBDE", "AAADE", "AAABF", "CCBBF"});
+//	cout << solution(6,6,{"TTTANT", "RRFACC", "RRRFCC", "TRRRAA","TTMMMF","TMMTTJ"});
 
 	return 0;
 }
